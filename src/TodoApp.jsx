@@ -46,7 +46,7 @@ export default function TodoApp() {
   function handleDeleteTodo(id) {
     dispatch({
       type: "deleted_todo",
-      id: id +1,
+      id: id,
     });
   }
 
