@@ -5,7 +5,6 @@ const initialTodos = [
   { id: 2, name: "Build a todo app", completed: false },
 ];
 
-
 function reducer(state, action) {
   switch (action.type) {
     case "added_todo": {
@@ -32,10 +31,14 @@ export default function TodoApp() {
 
   function handleAddTodo(e) {
     e.preventDefault();
-    const name = e.target.elements.todoName.value;
+    // verbose approach
+    // const name = e.target.elements.todoName.value;
+    // destructuring approach
+    const { todoName } = e.target.elements;
     dispatch({
       type: "added_todo",
-      name: name,
+      //name: name,
+      name: todoName.value,
     });
     e.target.reset();
   }
@@ -43,7 +46,7 @@ export default function TodoApp() {
   function handleDeleteTodo(id) {
     dispatch({
       type: "deleted_todo",
-      id: id,
+      id: id +1,
     });
   }
 
@@ -51,16 +54,16 @@ export default function TodoApp() {
     <>
       <p>
         Todo App: The component allows users to add new todos by entering text
-        in the input field and clicking the <b>"Add Todo"</b> button.{" "}
-        <p>
-          Each todo item in the list has a <b>"Delete"</b> button to remove it
-          from the list. The state is updated accordingly using the reducer
-          function.
-        </p>
+        in the input field and clicking the <b>&quot;Add Todo&quot;</b> button.{" "}
+      </p>
+      <p>
+        Each todo item in the list has a <b>&quot;Delete&quot;</b> button to
+        remove it from the list. The state is updated accordingly using the
+        reducer function.
       </p>
       <h3>Todo lists</h3>
       <form onSubmit={handleAddTodo}>
-        <input name="todoName" placeholder="Enter a new todo" />
+        <input name="todoName" placeholder="Enter a new todo" />{" "}
         <button type="submit">Add Todo</button>
       </form>
 
